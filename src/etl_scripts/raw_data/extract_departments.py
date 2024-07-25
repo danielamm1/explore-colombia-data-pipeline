@@ -28,7 +28,7 @@ def extract_data(
     :param limit: Number of records to fetch per request (default is 100)/
     :param offset:  Offset value per pagination (default is 0)
 
-    :returnd dict: Data items retrieved from the API
+    :returns Generator Data items retrieved from the API
     """
     while True:
         params = {'$limit': limit, '$offset': offset}
