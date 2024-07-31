@@ -4,7 +4,9 @@ Extracts departments and Municipality/City from datos.gov.co API for Colombia.
 import logging
 import sys
 from typing import Generator
+
 import requests
+
 # Logger Configuration
 logging.basicConfig(
     filename='./filelog.log',
