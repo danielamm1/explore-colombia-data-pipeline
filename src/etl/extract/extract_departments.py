@@ -1,6 +1,7 @@
 """
 Extracts departments and Municipality/City from datos.gov.co API for Colombia.
 """
+
 import logging
 import sys
 from typing import Generator
@@ -9,20 +10,17 @@ import requests
 
 # Logger Configuration
 logging.basicConfig(
-    filename='./filelog.log',
+    filename="./filelog.log",
     level=logging.DEBUG,
-    format='%(asctime)s - %(levelname)s - %(message)s',
-    filemode='w'
+    format="%(asctime)s - %(levelname)s - %(message)s",
+    filemode="w",
 )
 logger = logging.getLogger()
 
 
 def extract_data(
-        base_url: str,
-        endpoint: str,
-        limit: int = 1000,
-        offset: int = 0
-        ) -> Generator[dict, None, None]:
+    base_url: str, endpoint: str, limit: int = 1000, offset: int = 0
+) -> Generator[dict, None, None]:
     """
     Extracts data from an API based on the provided base URL and endpoint.
 
@@ -34,11 +32,9 @@ def extract_data(
     :returns Generator   Data items retrieved from the API
     """
     while True:
-        params = {'$limit': limit, '$offset': offset}
+        params = {"$limit": limit, "$offset": offset}
         try:
-            response = requests.get(base_url+endpoint,
-                                    params=params,
-                                    timeout=20)
+            response = requests.get(base_url + endpoint, params=params, timeout=20)
             data = response.json()
             offset += limit
             if not data:
@@ -49,10 +45,10 @@ def extract_data(
             sys.exit(1)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # Configuration of the URL and data file
-    URL = 'https://www.datos.gov.co/resource/'
-    FILE = '95qx-tzs7.json'
+    URL = "https://www.datos.gov.co/resource/"
+    FILE = "95qx-tzs7.json"
     # Storage for extracted data
     stored_data = []
     # Generator to extract and sotre data
